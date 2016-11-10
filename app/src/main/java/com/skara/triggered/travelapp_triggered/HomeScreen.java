@@ -1,6 +1,7 @@
 package com.skara.triggered.travelapp_triggered;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,26 +32,37 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+
         RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
         initializeData();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
 
-        
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
 
 
+    }
+
+    public void openRouteOptions(View view) {
+        Intent intent = new Intent(this, Route_options.class);
+//        EditText editText = (EditText) findViewById(R.id.edit_message);
+//        String message = editText.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
 
@@ -96,6 +108,9 @@ public class HomeScreen extends AppCompatActivity {
 
     private void initializeData(){
         dest_list = new ArrayList<>();
+        dest_list.add(new Destination("THE ZOO", R.drawable.a));
+        dest_list.add(new Destination("MARINA BAY",R.drawable.b));
+        dest_list.add(new Destination("SUTD", R.drawable.c));
         dest_list.add(new Destination("THE ZOO", R.drawable.a));
         dest_list.add(new Destination("MARINA BAY",R.drawable.b));
         dest_list.add(new Destination("SUTD", R.drawable.c));

@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Route_options"
+            android:label="@string/title_activity_route_options"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Dest_details"></activity>
     </application>
 
 </manifest>
