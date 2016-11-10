@@ -25,20 +25,21 @@ import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 public class HomeScreen extends AppCompatActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+        RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
         initializeData();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
 
-
+        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,52 +48,56 @@ public class HomeScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
     }
 
-        @Override
-        public boolean onCreateOptionsMenu (Menu menu){
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
             return true;
         }
 
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
-
-        public
+        return super.onOptionsItemSelected(item);
+    }
 // Data ===============================================================================
-        class Destination {
-            String name;
+    class Destination {
+        String name;
 
-            int photoId;
+        int photoId;
 
-            Destination(String name, int photoId) {
-                this.name = name;
-                this.photoId = photoId;
-            }
+        Destination(String name,  int photoId) {
+            this.name = name;
+            this.photoId = photoId;
         }
+    }
 
-        private List<Destination> dest_list;
-        // dest_list = destination list
+    private List<Destination> dest_list;
+    // dest_list = destination list
 
 
-    private void initializeData() {
+    private void initializeData(){
         dest_list = new ArrayList<>();
         dest_list.add(new Destination("THE ZOO", R.drawable.a));
-        dest_list.add(new Destination("MARINA BAY", R.drawable.b));
+        dest_list.add(new Destination("MARINA BAY",R.drawable.b));
         dest_list.add(new Destination("SUTD", R.drawable.c));
 
     }
@@ -100,5 +105,4 @@ public class HomeScreen extends AppCompatActivity {
 
 
 }
-
 
