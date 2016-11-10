@@ -3,7 +3,11 @@ package com.skara.triggered.travelapp_triggered;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +28,7 @@ import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 
 public class HomeScreen extends AppCompatActivity {
 
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,25 @@ public class HomeScreen extends AppCompatActivity {
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
 
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_reorder_black_24dp);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +92,9 @@ public class HomeScreen extends AppCompatActivity {
             if (id == R.id.action_settings) {
                 return true;
             }
+            else if (id == android.R.id.home) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
 
             return super.onOptionsItemSelected(item);
         }
@@ -91,6 +118,9 @@ public class HomeScreen extends AppCompatActivity {
 
     private void initializeData() {
         dest_list = new ArrayList<>();
+        dest_list.add(new Destination("THE ZOO", R.drawable.a));
+        dest_list.add(new Destination("MARINA BAY", R.drawable.b));
+        dest_list.add(new Destination("SUTD", R.drawable.c));
         dest_list.add(new Destination("THE ZOO", R.drawable.a));
         dest_list.add(new Destination("MARINA BAY", R.drawable.b));
         dest_list.add(new Destination("SUTD", R.drawable.c));

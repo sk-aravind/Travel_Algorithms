@@ -41,7 +41,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
                 @Override
                 public void onClick(View view) {
                     String dest = destName.getText().toString();
-                    Toast.makeText(view.getContext(), dest, Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_LONG).show();
                 }
             });
         }
