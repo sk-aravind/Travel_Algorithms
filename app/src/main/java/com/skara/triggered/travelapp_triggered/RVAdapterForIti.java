@@ -10,18 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Skara on 9/11/16.
  */
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
-//all the methods needs to be overwritten to prevent error
+public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHolder> {
+    //all the methods needs to be overwritten to prevent error
     List<HomeScreen.Destination> dest_list;
 
-    RVAdapter(List<HomeScreen.Destination> dest_list){
+    RVAdapterForIti(List<HomeScreen.Destination> dest_list){
         this.dest_list = dest_list;
     }
 
@@ -30,21 +29,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         CardView cv;
         TextView destName;
         ImageView destPhoto;
-        FloatingActionButton addBtn;
+        FloatingActionButton removeBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             destName = (TextView)itemView.findViewById(R.id.dest_name);
             destPhoto = (ImageView)itemView.findViewById(R.id.dest_photo);
-            addBtn = (FloatingActionButton)itemView.findViewById(R.id.addBtn);
+            removeBtn = (FloatingActionButton)itemView.findViewById(R.id.removeBtn);
 
-            addBtn.setOnClickListener(new View.OnClickListener() {
+            removeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String dest = destName.getText().toString();
-                    Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_SHORT).show();
-                    addToItinerary(destName.getText().toString(),(Integer) destPhoto.getTag());
+                    Toast.makeText(view.getContext(),"Removed " + dest, Toast.LENGTH_SHORT).show();
+                    removeFromItinerary(destName.getText().toString(),(Integer) destPhoto.getTag(),getAdapterPosition());
                 }
             });
         }
@@ -52,7 +51,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.destination_card, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.itinerary_card, viewGroup, false);
         ViewHolder pvh = new ViewHolder(v);
         return pvh;
     }
@@ -74,16 +73,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    public void removeAt(int position){
+        dest_list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, dest_list.size());
+    }
 
-    public void addToItinerary(String s,int i){
-        if (HomeScreen.iti_list == null){
-            HomeScreen.iti_list = new ArrayList<>();
-        }
-        for (HomeScreen.Destination j : HomeScreen.iti_list){
-            if (j.name==s){
-                return;
-            }
-        }
-        HomeScreen.iti_list.add(new HomeScreen.Destination(s, i));
+    public void removeFromItinerary(String s,int i,int position){
+        removeAt(position);
+        HomeScreen.iti_list.remove(new HomeScreen.Destination(s, i));
     }
 }

@@ -1,6 +1,7 @@
 package com.skara.triggered.travelapp_triggered;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 public class HomeScreen extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    public static ArrayList<Destination> iti_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class HomeScreen extends AppCompatActivity {
         rv.setLayoutManager(llm);
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -59,6 +60,14 @@ public class HomeScreen extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_itinerary:
+                                goToItinerary(menuItem.getActionView());
+                                break;
+                            default:
+                                return true;
+                        }
                         return true;
                     }
                 });
@@ -99,9 +108,37 @@ public class HomeScreen extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
 
-        public
-// Data ===============================================================================
-        class Destination {
+
+    // Navigation Drawer ===================================================================
+    @Override
+    public void onBackPressed() {
+        if (isNavDrawerOpen()) {
+            closeNavDrawer();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    protected boolean isNavDrawerOpen() {
+        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    protected void closeNavDrawer() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
+    }
+
+    public void goToItinerary(View v){
+        Intent i = new Intent(HomeScreen.this,ItineraryMain.class);
+        startActivity(i);
+    }
+
+    //===============================================================================
+
+
+    // Data ===============================================================================
+    public static class Destination {
             String name;
 
             int photoId;

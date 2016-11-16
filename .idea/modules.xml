@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TravelApp_Triggered.iml" filepath="$PROJECT_DIR$/TravelApp_Triggered.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Travel_Algorithms.iml" filepath="$PROJECT_DIR$/Travel_Algorithms.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
