@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ItineraryMain"
+            android:label="@string/title_activity_itinerary_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TravelRouteFragment"></activity>
+        <activity
             android:name=".Route_options"
             android:label="@string/title_activity_route_options"
             android:parentActivityName=".HomeScreen"

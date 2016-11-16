@@ -1,3 +1,4 @@
+
 package com.skara.triggered.travelapp_triggered;
 
 import android.content.Context;
@@ -52,20 +53,8 @@ public class HomeScreen extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick (View view, int position)
-            {
-                showDestDetails(view,dest_list.get(position));
-            }
-        }));
-
-
-        //telling the recycler where to read data from
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -82,15 +71,31 @@ public class HomeScreen extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_itinerary:
+                                goToItinerary(menuItem.getActionView());
+                                break;
+                            default:
+                                return true;
+                        }
                         return true;
                     }
-                });
+                }
+        );
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                showDestDetails(view, dest_list.get(position));
+            }
+        }));
 
-    }
 
-    public void showDestDetails(View view,Destination destination){
+        //telling the recycler where to read data from
+
+
+    public void showDestDetails(View view, Destination destination) {
 
         Intent intent = new Intent(this, Dest_details.class);
         intent.putExtra("name", destination.name);
@@ -105,6 +110,7 @@ public class HomeScreen extends AppCompatActivity {
                 new Pair<>(view.findViewById(R.id.dest_photo), "img_transition"));
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
+}
 
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
@@ -140,6 +146,30 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Navigation Drawer ===================================================================
+    @Override
+    public void onBackPressed() {
+        if (isNavDrawerOpen()) {
+            closeNavDrawer();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    protected boolean isNavDrawerOpen() {
+        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    protected void closeNavDrawer() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
+    }
+
+    public void goToItinerary(View v){
+        Intent i = new Intent(HomeScreen.this,ItineraryMain.class);
+        startActivity(i);
+    }
 
 
 
@@ -174,5 +204,7 @@ public class HomeScreen extends AppCompatActivity {
 
 
 }
+
+
 
 

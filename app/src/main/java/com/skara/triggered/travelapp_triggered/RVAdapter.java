@@ -1,3 +1,4 @@
+
 package com.skara.triggered.travelapp_triggered;
 
 import android.app.Activity;
@@ -16,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+        import java.util.ArrayList;
+        import java.util.List;
+
 import java.util.List;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -25,16 +29,21 @@ import static android.support.v4.app.ActivityCompat.startActivity;
  * Created by Skara on 9/11/16.
  */
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 //all the methods needs to be overwritten to prevent error
 
     static List<HomeScreen.Destination> dest_list;
 
     public static Activity activity;
 
-    RVAdapter(List<HomeScreen.Destination> dest_list){
+    RVAdapter(List<HomeScreen.Destination> dest_list) {
         this.dest_list = dest_list;
     }
+
+    RVAdapter(List<HomeScreen.Destination> dest_list) {
+        this.dest_list = dest_list;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView destName;
@@ -43,23 +52,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            destName = (TextView)itemView.findViewById(R.id.dest_name);
-            destPhoto = (ImageView)itemView.findViewById(R.id.dest_photo);
-            addBtn = (FloatingActionButton)itemView.findViewById(R.id.addBtn);
+            cv = (CardView) itemView.findViewById(R.id.cv);
+            destName = (TextView) itemView.findViewById(R.id.dest_name);
+            destPhoto = (ImageView) itemView.findViewById(R.id.dest_photo);
+            addBtn = (FloatingActionButton) itemView.findViewById(R.id.addBtn);
 
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String dest = destName.getText().toString();
-                    Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Added " + dest, Toast.LENGTH_SHORT).show();
+                    addToItinerary(destName.getText().toString(), (Integer) destPhoto.getTag());
                 }
             });
-
         }
     }
-
-
 
 
     @Override
@@ -73,6 +80,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder ViewHolder, int i) {
         ViewHolder.destName.setText(dest_list.get(i).name);
         ViewHolder.destPhoto.setImageResource(dest_list.get(i).photoId);
+        ViewHolder.destPhoto.setTag(dest_list.get(i).photoId);
 
     }
 
@@ -86,7 +94,17 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
-
+    public void addToItinerary(String s, int i) {
+        if (HomeScreen.iti_list == null) {
+            HomeScreen.iti_list = new ArrayList<>();
+        }
+        for (HomeScreen.Destination j : HomeScreen.iti_list) {
+            if (j.name == s) {
+                return;
+            }
+        }
+        HomeScreen.iti_list.add(new HomeScreen.Destination(s, i));
+    }
 
 }
+

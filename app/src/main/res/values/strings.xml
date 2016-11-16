@@ -1,3 +1,4 @@
+
 <resources>
     <string name="app_name">TravelApp_Triggered</string>
     <string name="action_settings">Settings</string>
@@ -9,4 +10,11 @@
     <string name="info_button_description">Show photo information</string>
     <string name="star_button_description">Fave this photo</string>
     <string name="photo_description">Photo</string>
+
+
+    <string name="title_activity_itinerary">Itinerary</string>
+    <string name="nav_itinerary">Itinerary</string>
+    <string name="title_activity_page_fragment">PageFragment</string>
+    <string name="title_activity_itinerary_main">ItineraryMain</string>
+    <string name="NoItems">You currently have no items in your itinerary</string>
 </resources>
