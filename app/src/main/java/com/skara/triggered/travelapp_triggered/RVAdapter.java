@@ -1,6 +1,12 @@
 package com.skara.triggered.travelapp_triggered;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +18,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import static android.support.v4.app.ActivityCompat.startActivity;
+
 /**
  * Created by Skara on 9/11/16.
  */
@@ -19,7 +28,9 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
 //all the methods needs to be overwritten to prevent error
 
-    List<HomeScreen.Destination> dest_list;
+    static List<HomeScreen.Destination> dest_list;
+
+    public static Activity activity;
 
     RVAdapter(List<HomeScreen.Destination> dest_list){
         this.dest_list = dest_list;
@@ -44,8 +55,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
                     Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_LONG).show();
                 }
             });
+
         }
     }
+
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -70,6 +85,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+
 
 
 }

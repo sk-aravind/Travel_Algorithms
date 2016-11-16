@@ -3,9 +3,13 @@ package com.skara.triggered.travelapp_triggered;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -21,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,16 +36,33 @@ public class HomeScreen extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        //setting toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //creating recycling view
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
         initializeData();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
+        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick (View view, int position)
+            {
+                showDestDetails(view,dest_list.get(position));
+            }
+        }));
+
+
+        //telling the recycler where to read data from
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
 
@@ -65,7 +87,23 @@ public class HomeScreen extends AppCompatActivity {
                 });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        
+
+    }
+
+    public void showDestDetails(View view,Destination destination){
+
+        Intent intent = new Intent(this, Dest_details.class);
+        intent.putExtra("name", destination.name);
+        intent.putExtra("img", destination.photoId);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                // the context of the activity
+                this,
+                // For each shared element, add to this method a new Pair item,
+                // which contains the reference of the view we are transitioning *from*,
+                // and the value of the transitionName attribute
+//                new Pair<>(view.findViewById(R.id.dest_name), "text_transition"),
+                new Pair<>(view.findViewById(R.id.dest_photo), "img_transition"));
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
         @Override
@@ -104,9 +142,10 @@ public class HomeScreen extends AppCompatActivity {
 
 
 
-    public
+
 // Data ===============================================================================
-        class Destination {
+        class Destination
+            implements Serializable {
             String name;
 
             int photoId;
