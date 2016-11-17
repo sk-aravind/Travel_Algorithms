@@ -33,7 +33,7 @@ import java.util.List;
 import static android.R.attr.data;
 import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
     private DrawerLayout mDrawerLayout;
     public static ArrayList<Destination> iti_list;
@@ -52,22 +52,10 @@ public class HomeScreen extends AppCompatActivity {
         initializeData();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-
-
-        // When you click on card
-        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick (View view, int position)
-            {
-                showDestDetails(view,dest_list.get(position));
-            }
-        }));
-
-
-        RVAdapter adapter = new RVAdapter(dest_list);
+        RVAdapter adapter = new RVAdapter(dest_list,this);
         rv.setAdapter(adapter);
 
+        // creating navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -105,18 +93,18 @@ public class HomeScreen extends AppCompatActivity {
 //        });
     }
 
-    public void showDestDetails(View view,Destination destination){
+    public void showDestDetails(View view,String destName, Integer destPhoto){
 
         Intent intent = new Intent(this, Dest_details.class);
-        intent.putExtra("name", destination.name);
-        intent.putExtra("img", destination.photoId);
+        intent.putExtra("name", destName);
+        intent.putExtra("img", destPhoto);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 // the context of the activity
                 this,
                 // For each shared element, add to this method a new Pair item,
                 // which contains the reference of the view we are transitioning *from*,
                 // and the value of the transitionName attribute
-//                new Pair<>(view.findViewById(R.id.dest_name), "text_transition"),
+                // new Pair<>(view.findViewById(R.id.dest_name), "text_transition"),
                 new Pair<>(view.findViewById(R.id.dest_photo), "img_transition"));
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }

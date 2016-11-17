@@ -1,13 +1,7 @@
 
 package com.skara.triggered.travelapp_triggered;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,28 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-        import java.util.ArrayList;
-        import java.util.List;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-import static android.support.v4.app.ActivityCompat.startActivity;
 
-/**
- * Created by Skara on 9/11/16.
- */
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 //all the methods needs to be overwritten to prevent error
 
     List<HomeScreen.Destination> dest_list;
 
-    public static Activity activity;
+    private DetailsInterface detailsListener;
 
-    RVAdapter(List<HomeScreen.Destination> dest_list){
+    RVAdapter(List<HomeScreen.Destination> dest_list,DetailsInterface detailsListener){
         this.dest_list = dest_list;
+        this.detailsListener = detailsListener;
     }
 
 
@@ -59,7 +46,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 public void onClick(View view) {
                     String dest = destName.getText().toString();
                     Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_SHORT).show();
-                    addToItinerary(destName.getText().toString(),(Integer) destPhoto.getTag());
+                    addToItinerary(dest,(Integer) destPhoto.getTag());
+                }
+            });
+
+            destPhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    detailsListener.showDestDetails(view,destName.getText().toString(),(Integer) destPhoto.getTag());
                 }
             });
         }
@@ -90,15 +84,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     }
 
 
-    public void addToItinerary(String s,int i){
+    public void addToItinerary(String destName,int destPhoto){
         if (HomeScreen.iti_list == null){
             HomeScreen.iti_list = new ArrayList<>();
         }
         for (HomeScreen.Destination j : HomeScreen.iti_list){
-            if (j.name==s){
+            if (j.name.equals(destName)){
                 return;
             }
         }
-        HomeScreen.iti_list.add(new HomeScreen.Destination(s, i));
+        HomeScreen.iti_list.add(new HomeScreen.Destination(destName, destPhoto));
     }
 }
