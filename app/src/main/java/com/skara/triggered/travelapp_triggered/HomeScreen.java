@@ -36,7 +36,7 @@ import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 public class HomeScreen extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
+    public static ArrayList<Destination> iti_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,18 @@ public class HomeScreen extends AppCompatActivity {
         initializeData();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
+
+        // When you click on card
+        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick (View view, int position)
+            {
+                showDestDetails(view,dest_list.get(position));
+            }
+        }));
+
 
         RVAdapter adapter = new RVAdapter(dest_list);
         rv.setAdapter(adapter);
@@ -81,21 +93,19 @@ public class HomeScreen extends AppCompatActivity {
                         }
                         return true;
                     }
-                }
-        );
+                });
 
-        rv.addOnItemTouchListener(new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                showDestDetails(view, dest_list.get(position));
-            }
-        }));
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+    }
 
-
-        //telling the recycler where to read data from
-
-
-    public void showDestDetails(View view, Destination destination) {
+    public void showDestDetails(View view,Destination destination){
 
         Intent intent = new Intent(this, Dest_details.class);
         intent.putExtra("name", destination.name);
@@ -110,41 +120,42 @@ public class HomeScreen extends AppCompatActivity {
                 new Pair<>(view.findViewById(R.id.dest_photo), "img_transition"));
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
-}
 
-        @Override
-        public boolean onCreateOptionsMenu (Menu menu){
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
             return true;
         }
-
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-            else if (id == android.R.id.home) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-
-            return super.onOptionsItemSelected(item);
+        else if (id == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
         }
+        else if (id == R.id.action_search) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void openRouteOptions(View view) {
         Intent intent = new Intent(this, Route_options.class);
-//        EditText editText = (EditText) findViewById(R.id.edit_message);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+
 
     // Navigation Drawer ===================================================================
     @Override
@@ -171,23 +182,23 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(i);
     }
 
+    //===============================================================================
 
 
-// Data ===============================================================================
-        class Destination
-            implements Serializable {
-            String name;
+    // Data ===============================================================================
+    public static class Destination {
+        String name;
 
-            int photoId;
+        int photoId;
 
-            Destination(String name, int photoId) {
-                this.name = name;
-                this.photoId = photoId;
-            }
+        Destination(String name, int photoId) {
+            this.name = name;
+            this.photoId = photoId;
         }
+    }
 
-        private List<Destination> dest_list;
-        // dest_list = destination list
+    public List<Destination> dest_list;
+    // dest_list = destination list
 
 
     private void initializeData() {
@@ -204,7 +215,3 @@ public class HomeScreen extends AppCompatActivity {
 
 
 }
-
-
-
-

@@ -12,7 +12,7 @@
         android:id="@+id/cv"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="13dp"
+        app:cardCornerRadius="8dp"
         >
 
         <RelativeLayout
@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:transitionName="img_transition"
                 />
 
             <TextView
@@ -38,13 +37,12 @@
                 android:textSize="32sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:transitionName="text_transition"
                 />
 
             <android.support.design.widget.FloatingActionButton
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                app:layout_anchor="@id/cv"
+                app:layout_anchor="@id/dest_name"
                 app:layout_anchorGravity="left|end|bottom"
                 android:clickable="true"
                 android:onClick="addToItinerary"
@@ -61,6 +59,5 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
 
 </LinearLayout>
