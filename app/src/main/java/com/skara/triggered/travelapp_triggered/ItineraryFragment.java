@@ -40,7 +40,7 @@ public class ItineraryFragment extends Fragment {
             RecyclerView rv = (RecyclerView) getView().findViewById(R.id.rv);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
             rv.setLayoutManager(llm);
-            RVAdapterForIti adapter = new RVAdapterForIti(dest_list);
+            RVAdapterForIti adapter = new RVAdapterForIti(dest_list,getActivity());
             rv.setAdapter(adapter);
         }
     }
