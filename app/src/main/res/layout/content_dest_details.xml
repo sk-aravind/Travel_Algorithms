@@ -125,6 +125,11 @@
 
             android:fontFamily="sans-serif-light" />
 
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/button_link"/>
+
         <TextView
             android:id="@+id/description"
 
