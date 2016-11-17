@@ -27,15 +27,19 @@ public class RVAdapterForTR extends RecyclerView.Adapter<RVAdapterForTR.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        TextView destName;
-        ImageView destPhoto;
+        TextView path;
+        TextView cost;
+        TextView time;
+        ImageView transport;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
-            destName = (TextView)itemView.findViewById(R.id.dest_name);
-            destPhoto = (ImageView)itemView.findViewById(R.id.dest_photo);
+            path = (TextView)itemView.findViewById(R.id.Path);
+            cost = (TextView)itemView.findViewById(R.id.Cost);
+            time = (TextView)itemView.findViewById(R.id.Time);
+            transport = (ImageView)itemView.findViewById(R.id.Transport);
 
         }
     }
@@ -49,9 +53,11 @@ public class RVAdapterForTR extends RecyclerView.Adapter<RVAdapterForTR.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder ViewHolder, int i) {
-        ViewHolder.destName.setText(dest_list.get(i).name);
-        ViewHolder.destPhoto.setImageResource(dest_list.get(i).photoId);
-        ViewHolder.destPhoto.setTag(dest_list.get(i).photoId);
+        ViewHolder.path.setText(dest_list.get(i).name);
+        ViewHolder.cost.setText(dest_list.get(i).name);
+        ViewHolder.time.setText(dest_list.get(i).name);
+        ViewHolder.transport.setImageResource(dest_list.get(i).photoId);
+        ViewHolder.transport.setTag(dest_list.get(i).photoId);
     }
 
     @Override
