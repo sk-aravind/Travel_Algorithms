@@ -54,9 +54,11 @@ public class Route_options extends AppCompatActivity {
         RadioGroup rg = (RadioGroup)findViewById(R.id.radioButtonGrp);
         String selectedRadio = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
 
-        String toDisplay = budget+" "+selectedRadio;
+        String toDisplay = "$" + budget + " " + selectedRadio;
         Toast.makeText(view.getContext(), toDisplay, Toast.LENGTH_LONG).show();
         //get value of budget from here
+
+//        HomeScreen.budget = Double.valueOf(budget).doubleValue();
     }
 
 
