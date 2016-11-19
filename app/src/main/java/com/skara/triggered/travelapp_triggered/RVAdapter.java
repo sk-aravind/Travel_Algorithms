@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,14 +33,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         CardView cv;
         TextView destName;
         ImageView destPhoto;
-        FloatingActionButton addBtn;
+        ImageButton addBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             destName = (TextView)itemView.findViewById(R.id.dest_name);
             destPhoto = (ImageView)itemView.findViewById(R.id.dest_photo);
-            addBtn = (FloatingActionButton)itemView.findViewById(R.id.addBtn);
+            addBtn = (ImageButton)itemView.findViewById(R.id.addBtn);
 
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -47,6 +48,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                     String dest = destName.getText().toString();
                     Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_SHORT).show();
                     addToItinerary(dest,(Integer) destPhoto.getTag());
+
+
                 }
             });
 

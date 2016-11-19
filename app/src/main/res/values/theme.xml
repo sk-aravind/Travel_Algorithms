@@ -65,4 +65,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_ab_up_white</item>
         <item name="android:displayOptions">homeAsUp</item>
     </style>
+
+
+
 </resources>
