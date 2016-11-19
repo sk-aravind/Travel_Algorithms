@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "516605839242",
+    "firebase_url": "https://everywhereelsedb.firebaseio.com",
+    "project_id": "everywhereelsedb",
+    "storage_bucket": "everywhereelsedb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516605839242:android:85f286b6cb1fd8fa",
+        "android_client_info": {
+          "package_name": "com.skara.triggered.travelapp_triggered"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516605839242-o0hue1c19k6fjq9jh71l01h31mg4mk25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skara.triggered.travelapp_triggered",
+            "certificate_hash": "A4F5D05BFD886F7A17E4ED4BF0BF6D002C24DB16"
+          }
+        },
+        {
+          "client_id": "516605839242-1boqb5nd6u929u1ee7qlf1gphgqs8vi9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgHMBZTsc-XYXbEZ7ftjOnQm1lqhYugpU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516605839242-1boqb5nd6u929u1ee7qlf1gphgqs8vi9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
