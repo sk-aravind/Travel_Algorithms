@@ -145,6 +145,8 @@ public class ItineraryMain extends AppCompatActivity {
                                                         sDialog
                                                                 .setTitleText("Oops...")
                                                                 .setContentText("Looks like there aren't any matches at the moment!")
+                                                                .setCancelText("OK")
+                                                                .setConfirmText("Check again")
                                                                 .changeAlertType(SweetAlertDialog.WARNING_TYPE);
                                                         mDatabase.child("users").child("travelplans").child(userInputDialogEditText.getText().toString()).setValue(sorted);
                                                         mDatabase.child("users").child("phone").child(userInputDialogEditText.getText().toString()).setValue(mPhoneNumber);
