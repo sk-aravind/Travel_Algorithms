@@ -56,9 +56,9 @@ public class TravelRouteFragment extends Fragment {
 
     private void initializeData() {
         travel_list = new ArrayList<>();
-        travel_list.add(new HomeScreen.Destination("BY FOOT", R.drawable.walk));
-        travel_list.add(new HomeScreen.Destination("BY BUS", R.drawable.bus));
-        travel_list.add(new HomeScreen.Destination("BY TAXI", R.drawable.taxi));
+        travel_list.add(new HomeScreen.Destination("BY FOOT", R.drawable.search));
+        travel_list.add(new HomeScreen.Destination("BY BUS", R.drawable.search));
+        travel_list.add(new HomeScreen.Destination("BY TAXI", R.drawable.search));
         dest_list = travel_list;
     }
 

@@ -142,10 +142,10 @@ public class ItineraryMain extends AppCompatActivity {
                                                     System.out.println(userInputDialogEditText.getText().toString()+" -local");
 
                                                     if (val_firebase == null || val_firebase == userInputDialogEditText.getText().toString()) {
-                                                        new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE)
+                                                        sDialog
                                                                 .setTitleText("Oops...")
-                                                                .setContentText("Something went wrong!")
-                                                                .show();
+                                                                .setContentText("Looks like there aren't any matches at the moment!")
+                                                                .changeAlertType(SweetAlertDialog.WARNING_TYPE);
                                                         mDatabase.child("users").child("travelplans").child(userInputDialogEditText.getText().toString()).setValue(sorted);
                                                         mDatabase.child("users").child("phone").child(userInputDialogEditText.getText().toString()).setValue(mPhoneNumber);
 
