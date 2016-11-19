@@ -12,8 +12,7 @@
         android:id="@+id/cv"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="13dp"
-        >
+        app:cardCornerRadius="13dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,23 +20,45 @@
             >
 
             <ImageView
-                android:id="@+id/dest_photo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/Transport"
+                android:layout_gravity="left|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/dest_name"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textSize="32sp"
+                android:id="@+id/Path"
+                android:textSize="24dp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                />
+                android:textColor="#000000"
+                android:layout_alignTop="@+id/Transport"
+                android:layout_toEndOf="@+id/Transport" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/Cost"
+                android:paddingBottom="30dp"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/Transport" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/Time"
+                android:paddingLeft="30dp"
+                android:paddingBottom="30dp"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 

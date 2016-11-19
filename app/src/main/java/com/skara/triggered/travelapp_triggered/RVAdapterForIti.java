@@ -1,5 +1,7 @@
 package com.skara.triggered.travelapp_triggered;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
 
 /**
@@ -19,9 +20,11 @@ import java.util.List;
 public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHolder> {
     //all the methods needs to be overwritten to prevent error
     List<HomeScreen.Destination> dest_list;
+    private Context context;
 
-    RVAdapterForIti(List<HomeScreen.Destination> dest_list){
+    RVAdapterForIti(List<HomeScreen.Destination> dest_list,Context context){
         this.dest_list = dest_list;
+        this.context = context;
     }
 
 
@@ -44,6 +47,13 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
                     String dest = destName.getText().toString();
                     Toast.makeText(view.getContext(),"Removed " + dest, Toast.LENGTH_SHORT).show();
                     removeFromItinerary(destName.getText().toString(),(Integer) destPhoto.getTag(),getAdapterPosition());
+                }
+            });
+
+            destPhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showDestDetails(destName.getText().toString(),(Integer) destPhoto.getTag());
                 }
             });
         }
@@ -82,5 +92,12 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
     public void removeFromItinerary(String s,int i,int position){
         removeAt(position);
         HomeScreen.iti_list.remove(new HomeScreen.Destination(s, i));
+    }
+
+    public void showDestDetails(String destName, Integer destPhoto){
+        Intent intent = new Intent(context, Dest_details.class);
+        intent.putExtra("name", destName);
+        intent.putExtra("img", destPhoto);
+        context.startActivity(intent);
     }
 }
