@@ -1,5 +1,6 @@
 package com.skara.triggered.travelapp_triggered;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class Route_options extends AppCompatActivity {
+    public static final String ARG_PAGE = "ARG_PAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +26,6 @@ public class Route_options extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -48,18 +41,21 @@ public class Route_options extends AppCompatActivity {
 
 
     public void storeValue(View view){
+        HomeScreen.algo_selected = "";
+
         EditText edit = (EditText)findViewById(R.id.budget_input);
         String budget = edit.getText().toString();
 
         RadioGroup rg = (RadioGroup)findViewById(R.id.radioButtonGrp);
-        String selectedRadio = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
-
-        String toDisplay = "$" + budget + " " + selectedRadio;
-        Toast.makeText(view.getContext(), toDisplay, Toast.LENGTH_LONG).show();
+        //get the algorithm selected here
+        HomeScreen.algo_selected = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
         //get value of budget from here
+        HomeScreen.budget = Double.valueOf(budget).doubleValue();
 
-//        HomeScreen.budget = Double.valueOf(budget).doubleValue();
-    }
+        Intent i = new Intent(this, ItineraryMain.class);
+        i.putExtra(ARG_PAGE,2);
+        startActivity(i);
+}
 
 
 }

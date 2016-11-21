@@ -47,7 +47,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                 public void onClick(View view) {
                     String dest = destName.getText().toString();
                     Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_SHORT).show();
-                    addToItinerary(dest,(Integer) destPhoto.getTag());
+                    addToItinerary(dest,(Integer) destPhoto.getTag(),getAdapterPosition());
 
 
                 }
@@ -85,18 +85,22 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    public void removeAt(int position){
+        dest_list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, dest_list.size());
+    }
 
-    public void addToItinerary(String destName,int destPhoto){
-        if (HomeScreen.iti_list == null && HomeScreen.locationsToGo == null){
-            HomeScreen.iti_list = new ArrayList<>();
-            HomeScreen.locationsToGo = new ArrayList<>();
-        }
+    public void addToItinerary(String destName,int destPhoto,int position){
+        removeAt(position);
+
         for (HomeScreen.Destination j : HomeScreen.iti_list){
             if (j.name.equals(destName)){
                 return;
             }
         }
         HomeScreen.iti_list.add(new HomeScreen.Destination(destName, destPhoto));
+        HomeScreen.dest_list.remove(new HomeScreen.Destination(destName, destPhoto));
         HomeScreen.locationsToGo.add(TransportData.getLocationEnum(destName));
     }
 }

@@ -90,6 +90,7 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
     public void removeFromItinerary(String s,int i,int position){
         removeAt(position);
         HomeScreen.iti_list.remove(new HomeScreen.Destination(s, i));
+        HomeScreen.dest_list.add(new HomeScreen.Destination(s, i));
         HomeScreen.locationsToGo.remove(TransportData.getLocationEnum(s));
     }
 

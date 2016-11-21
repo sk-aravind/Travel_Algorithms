@@ -50,6 +50,7 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     private DrawerLayout mDrawerLayout;
     public static List<Destination> dest_list;
     public static ArrayList<Destination> iti_list;
+    public static String algo_selected;
     public static ArrayList<TransportData.locations> locationsToGo;
     public static double budget;
     public static final TransportData.locations startingLocation = TransportData.getLocationEnum("Marina Bay Sands");
@@ -264,19 +265,17 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     }
 
 
-
-
-
     private void initializeData() {
-        dest_list = new ArrayList<>();
-        dest_list.add(new Destination("Marina Bay Sands", R.drawable.a,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-        dest_list.add(new Destination("Singapore Flyer", R.drawable.b,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-        dest_list.add(new Destination("Vivo City", R.drawable.c,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-        dest_list.add(new Destination("Resort World Sentosa", R.drawable.a,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-        dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-        dest_list.add(new Destination("Zoo", R.drawable.c,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
-
-
+        if (iti_list == null) {
+            dest_list = new ArrayList<>();
+            iti_list = new ArrayList<>();
+            locationsToGo = new ArrayList<>();
+            dest_list.add(new Destination("Singapore Flyer", R.drawable.b, getString(R.string.X_weblink), getString(R.string.X_des), getString(R.string.X_opert)));
+            dest_list.add(new Destination("Vivo City", R.drawable.c, getString(R.string.X_weblink), getString(R.string.X_des), getString(R.string.X_opert)));
+            dest_list.add(new Destination("Resort World Sentosa", R.drawable.a, getString(R.string.X_weblink), getString(R.string.X_des), getString(R.string.X_opert)));
+            dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b, getString(R.string.X_weblink), getString(R.string.X_des), getString(R.string.X_opert)));
+            dest_list.add(new Destination("Zoo", R.drawable.c, getString(R.string.X_weblink), getString(R.string.X_des), getString(R.string.X_opert)));
+        }
 
     }
     //===============================================================================

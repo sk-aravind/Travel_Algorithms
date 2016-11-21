@@ -55,7 +55,7 @@
             android:layout_marginTop="23dp"
             android:id="@+id/radioButton" />
         <RadioButton
-            android:text="Accurate"
+            android:text="Exhaustive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/radioButton"

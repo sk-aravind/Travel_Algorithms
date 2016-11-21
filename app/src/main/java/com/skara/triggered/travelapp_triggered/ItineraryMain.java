@@ -44,6 +44,7 @@ public class ItineraryMain extends AppCompatActivity {
     private String mUserId;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    public static final String ARG_PAGE = "ARG_PAGE";
     final Context c = this;
     List<HomeScreen.Destination> dest_list;
     String list_stringified;
@@ -65,6 +66,10 @@ public class ItineraryMain extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        //
+        int defaultValue = 0;
+        int page = getIntent().getIntExtra(ARG_PAGE, defaultValue);
+        viewPager.setCurrentItem(page);
 
         // Initialize Firebase Auth and Database Reference
         mFirebaseAuth = FirebaseAuth.getInstance();
