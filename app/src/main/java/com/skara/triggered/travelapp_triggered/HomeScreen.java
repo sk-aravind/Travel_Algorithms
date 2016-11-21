@@ -39,8 +39,10 @@ import com.google.firebase.database.DatabaseReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static android.R.attr.data;
+import static android.R.id.list;
 import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 
 public class HomeScreen extends AppCompatActivity implements DetailsInterface{
@@ -121,6 +123,7 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         Intent intent = new Intent(this, Dest_details.class);
         intent.putExtra("name", destName);
         intent.putExtra("img", destPhoto);
+
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 // the context of the activity
                 this,
@@ -236,26 +239,45 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     public static class Destination {
         String name;
         String id;
+        String weblink;
+        String description;
+        String operatingHours;
+
+
         int photoId;
+
+        Destination(String name, int photoId,String weblink, String description , String operatingHours ) {
+            this.name = name;
+            this.photoId = photoId;
+            this.id = name.substring(0,1);
+            this.weblink = weblink ;
+            this.description = description;
+            this.operatingHours = operatingHours;
+        }
 
         Destination(String name, int photoId) {
             this.name = name;
             this.photoId = photoId;
             this.id = name.substring(0,1);
         }
+
     }
 
 
+
+
+
     private void initializeData() {
-        if (iti_list == null) {
-            dest_list = new ArrayList<>();
-            dest_list.add(new Destination("Marina Bay Sands", R.drawable.a));
-            dest_list.add(new Destination("Singapore Flyer", R.drawable.b));
-            dest_list.add(new Destination("Vivo City", R.drawable.c));
-            dest_list.add(new Destination("Resort World Sentosa", R.drawable.a));
-            dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b));
-            dest_list.add(new Destination("Zoo", R.drawable.c));
-        }
+        dest_list = new ArrayList<>();
+        dest_list.add(new Destination("Marina Bay Sands", R.drawable.a,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+        dest_list.add(new Destination("Singapore Flyer", R.drawable.b,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+        dest_list.add(new Destination("Vivo City", R.drawable.c,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+        dest_list.add(new Destination("Resort World Sentosa", R.drawable.a,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+        dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+        dest_list.add(new Destination("Zoo", R.drawable.c,getString(R.string.X_weblink),getString(R.string.X_des),getString(R.string.X_opert)));
+
+
+
     }
     //===============================================================================
 }

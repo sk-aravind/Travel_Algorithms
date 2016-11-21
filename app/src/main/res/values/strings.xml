@@ -17,4 +17,9 @@
     <string name="title_activity_itinerary_main">ItineraryMain</string>
     <string name="NoItems">You currently have no items in your itinerary</string>
     <string name="title_activity_maps">Map</string>
+
+
+    <string name="X_weblink">www.google.com</string>
+    <string name="X_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="X_opert">9 10pm son</string>
 </resources>

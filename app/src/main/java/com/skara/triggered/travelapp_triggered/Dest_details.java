@@ -12,27 +12,55 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class Dest_details extends AppCompatActivity {
 
-    private TextView textView;
-    private ImageView imageView;
+    TextView title;
+    TextView weblinktext;
+    TextView descriptiontext;
+    TextView operttext;
+    ImageView imgview;
+
+    String weblink ;
+    String descript ;
+    String opert ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest_details);
 
-        textView = (TextView) this.findViewById(R.id.detail_titlename);
-        imageView = (ImageView) this.findViewById(R.id.dest_photo);
+        title = (TextView) this.findViewById(R.id.detail_titlename);
+        weblinktext = (TextView) this.findViewById(R.id.weblink);
+        descriptiontext = (TextView) this.findViewById(R.id.description);
+        operttext = (TextView) this.findViewById(R.id.opert);
+        imgview = (ImageView) this.findViewById(R.id.dest_photo);
 
 
         Intent i = getIntent();
         String name = i.getStringExtra("name");
         int img = i.getIntExtra("img", 0 );
 
-        textView.setText(name);
-        imageView.setImageResource(img);
+        System.out.println("this is it"+HomeScreen.dest_list);
+
+        for(HomeScreen.Destination d : HomeScreen.dest_list){
+            if(d.name.equals(name)){
+            weblink = d.weblink;
+            descript = d.description;
+            opert = d.operatingHours;
+            }
+        }
+
+
+        System.out.println("weblink   "+weblink);
+        title.setText(name);
+        imgview.setImageResource(img);
+        weblinktext.setText(weblink);
+        descriptiontext.setText(descript);
+        operttext.setText(opert);
+
 
         final Button button = (Button) findViewById(R.id.button_link);
         button.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +68,7 @@ public class Dest_details extends AppCompatActivity {
                 Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+
             }
         });
 
