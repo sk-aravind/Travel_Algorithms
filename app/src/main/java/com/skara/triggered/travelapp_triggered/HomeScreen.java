@@ -46,9 +46,10 @@ import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
     private DrawerLayout mDrawerLayout;
+    public static List<Destination> dest_list;
     public static ArrayList<Destination> iti_list;
     public static ArrayList<TransportData.locations> locationsToGo;
-    public static final double budget = 15;
+    public static double budget;
     public static final TransportData.locations startingLocation = TransportData.getLocationEnum("Marina Bay Sands");
 
     // Firebase
@@ -85,14 +86,6 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //creating recycling view
-        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
-        initializeData();
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
-        RVAdapter adapter = new RVAdapter(dest_list,this);
-        rv.setAdapter(adapter);
 
         // creating navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -171,10 +164,19 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         startActivity(intent);
     }
 
-    //Firebase methods
+    //Firebase methods & creating view
     @Override
     public void onStart() {
         super.onStart();
+
+        //creating recycling view
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+        initializeData();
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        RVAdapter adapter = new RVAdapter(dest_list,this);
+        rv.setAdapter(adapter);
+
         mAuth.addAuthStateListener(mAuthListener);
     }
     @Override
@@ -243,21 +245,17 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         }
     }
 
-    public List<Destination> dest_list;
-    // dest_list = destination list
-
 
     private void initializeData() {
-        dest_list = new ArrayList<>();
-        dest_list.add(new Destination("Marina Bay Sands", R.drawable.a));
-        dest_list.add(new Destination("Singapore Flyer", R.drawable.b));
-        dest_list.add(new Destination("Vivo City", R.drawable.c));
-        dest_list.add(new Destination("Resort World Sentosa", R.drawable.a));
-        dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b));
-        dest_list.add(new Destination("Zoo", R.drawable.c));
-
-
-
+        if (iti_list == null) {
+            dest_list = new ArrayList<>();
+            dest_list.add(new Destination("Marina Bay Sands", R.drawable.a));
+            dest_list.add(new Destination("Singapore Flyer", R.drawable.b));
+            dest_list.add(new Destination("Vivo City", R.drawable.c));
+            dest_list.add(new Destination("Resort World Sentosa", R.drawable.a));
+            dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b));
+            dest_list.add(new Destination("Zoo", R.drawable.c));
+        }
     }
     //===============================================================================
 }
