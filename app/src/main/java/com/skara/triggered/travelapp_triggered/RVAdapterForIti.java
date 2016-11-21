@@ -3,6 +3,8 @@ package com.skara.triggered.travelapp_triggered;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
-/**
- * Created by Skara on 9/11/16.
- */
 
 public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHolder> {
     //all the methods needs to be overwritten to prevent error
@@ -62,8 +61,7 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.itinerary_card, viewGroup, false);
-        ViewHolder pvh = new ViewHolder(v);
-        return pvh;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -92,6 +90,7 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
     public void removeFromItinerary(String s,int i,int position){
         removeAt(position);
         HomeScreen.iti_list.remove(new HomeScreen.Destination(s, i));
+        HomeScreen.locationsToGo.remove(TransportData.getLocationEnum(s));
     }
 
     public void showDestDetails(String destName, Integer destPhoto){

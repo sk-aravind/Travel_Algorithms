@@ -13,9 +13,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by weiqu on 11/14/2016.
- */
 public class ItineraryFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
@@ -37,7 +34,7 @@ public class ItineraryFragment extends Fragment {
         }
 
         else{
-            RecyclerView rv = (RecyclerView) getView().findViewById(R.id.rv);
+            RecyclerView rv = (RecyclerView) getView().findViewById(R.id.rvITI);
             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
             rv.setLayoutManager(llm);
             RVAdapterForIti adapter = new RVAdapterForIti(dest_list,getActivity());

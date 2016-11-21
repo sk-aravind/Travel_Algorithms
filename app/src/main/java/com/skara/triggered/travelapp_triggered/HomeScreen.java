@@ -47,6 +47,9 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
     private DrawerLayout mDrawerLayout;
     public static ArrayList<Destination> iti_list;
+    public static ArrayList<TransportData.locations> locationsToGo;
+    public static final double budget = 15;
+    public static final TransportData.locations startingLocation = TransportData.getLocationEnum("Marina Bay Sands");
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -246,17 +249,15 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
     private void initializeData() {
         dest_list = new ArrayList<>();
-        dest_list.add(new Destination("THE ZOO", R.drawable.a));
-        dest_list.add(new Destination("MARINA BAY", R.drawable.b));
-        dest_list.add(new Destination("SUTD", R.drawable.c));
-        dest_list.add(new Destination("THE ZOO", R.drawable.a));
-        dest_list.add(new Destination("MARINA BAY", R.drawable.b));
-        dest_list.add(new Destination("SUTD", R.drawable.c));
+        dest_list.add(new Destination("Marina Bay Sands", R.drawable.a));
+        dest_list.add(new Destination("Singapore Flyer", R.drawable.b));
+        dest_list.add(new Destination("Vivo City", R.drawable.c));
+        dest_list.add(new Destination("Resort World Sentosa", R.drawable.a));
+        dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b));
+        dest_list.add(new Destination("Zoo", R.drawable.c));
 
 
 
     }
     //===============================================================================
-
-
 }
