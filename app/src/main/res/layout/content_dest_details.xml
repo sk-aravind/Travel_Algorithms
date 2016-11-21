@@ -147,6 +147,39 @@
 
             android:lineSpacingMultiplier="1.2" />
 
+        <TextView
+            android:id="@+id/weblink"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:textSize="32sp"
+            android:textStyle="bold"
+
+            android:transitionName="text_transition"
+
+            android:lineSpacingMultiplier="1.2" />
+        <TextView
+            android:id="@+id/opert"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:textSize="32sp"
+            android:textStyle="bold"
+
+            android:transitionName="text_transition"
+
+            android:lineSpacingMultiplier="1.2" />
+
     </LinearLayout>
 
 </ScrollView>
