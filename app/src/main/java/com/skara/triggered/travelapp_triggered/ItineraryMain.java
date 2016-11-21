@@ -35,6 +35,10 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class ItineraryMain extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String mUserId;

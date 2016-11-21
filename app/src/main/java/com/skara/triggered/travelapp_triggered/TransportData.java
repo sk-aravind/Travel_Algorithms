@@ -18,7 +18,7 @@ public class TransportData {
         ZOO,
     }
 
-    public static HashMap<locations, Integer> places;
+    private static HashMap<locations, Integer> places;
     static{
         places = new HashMap<>();
         places.put(locations.MBS,0);
@@ -29,7 +29,7 @@ public class TransportData {
         places.put(locations.ZOO,5);
     }
 
-    public static double[][][] busT = {
+    private static double[][][] busT = {
             //To---->
             //(Cost (Dollars), Time (mins))
             // MBS SF VC RWS BTRT ZOO
@@ -40,7 +40,7 @@ public class TransportData {
             {{0.88,18},{0.98,23},{0.98,19},{3.98,28},{0.00,0.00},{1.91,83}},
             {{1.88,86},{1.96,87},{2.11,86},{4.99,96},{1.91,84},{0.00,0.00}}
     };
-    public static double[][][] walkT = {
+    private static double[][][] walkT = {
             //To---->
             //(Cost (Dollars), Time (mins))
             // MBS SF VC RWS BTRT ZOO
@@ -51,7 +51,7 @@ public class TransportData {
             {{0.00,28},{0.00,39},{0.00,47},{0.00,55},{0.00,0.00},{0.00,264}},
             {{0.00,269},{0.00,264},{0.00,270.00},{0.00,285},{0.00,264},{0.00,0.00}}
     };
-    public static double[][][] taxiT = {
+    private static double[][][] taxiT = {
             //To---->
             //(Cost (Dollars), Time (mins))
             // MBS SF VC RWS BTRT ZOO
@@ -63,12 +63,13 @@ public class TransportData {
             {{22.48,32},{19.40,29},{21.48,32},{23.68,36},{21.6,30.00},{0.00,0.00}}
     };
 
-
-//    @param transportType enum
-//    @return double[] {cost,time}
-
+//    /**
+//     * @param transportType enum
+//     * @return double[] {cost,time}
+//     */
 
     public static double[] getData(transportType t, locations from, locations to) {
+
         int from_i = places.get(from);
         int to_i = places.get(to);
         double[] data = new double[2];
@@ -84,4 +85,33 @@ public class TransportData {
         return data;
     }
 
+    public static locations getLocationEnum(String s){
+        switch(s){
+            case "Marina Bay Sands":
+                return locations.MBS;
+            case "Singapore Flyer":
+                return locations.SF;
+            case "Vivo City":
+                return locations.VC;
+            case "Resort World Sentosa":
+                return locations.RWS;
+            case "Buddha Tooth Relic Temple":
+                return locations.BTRT;
+            case "Zoo":
+                return locations.ZOO;
+        }
+        return null;
+    }
+
+    public static transportType getTransportType(String s){
+        switch(s){
+            case "taxi":
+                return transportType.TAXI;
+            case "bus":
+                return transportType.BUS;
+            case "walk":
+                return transportType.WALK;
+        }
+        return null;
+    }
 }

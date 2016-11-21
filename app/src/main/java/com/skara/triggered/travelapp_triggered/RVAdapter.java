@@ -65,8 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.destination_card, viewGroup, false);
-        ViewHolder pvh = new ViewHolder(v);
-        return pvh;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -88,8 +87,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
 
     public void addToItinerary(String destName,int destPhoto){
-        if (HomeScreen.iti_list == null){
+        if (HomeScreen.iti_list == null && HomeScreen.locationsToGo == null){
             HomeScreen.iti_list = new ArrayList<>();
+            HomeScreen.locationsToGo = new ArrayList<>();
         }
         for (HomeScreen.Destination j : HomeScreen.iti_list){
             if (j.name.equals(destName)){
@@ -97,5 +97,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
             }
         }
         HomeScreen.iti_list.add(new HomeScreen.Destination(destName, destPhoto));
+        HomeScreen.locationsToGo.add(TransportData.getLocationEnum(destName));
     }
 }
