@@ -29,6 +29,8 @@ public class TravelRouteFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        HomeScreen.algo_selected="";
+
         // Initialize Fast Algorithm Solver
         initializeData();
 

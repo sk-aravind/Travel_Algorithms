@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,14 +32,14 @@ public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHo
         CardView cv;
         TextView destName;
         ImageView destPhoto;
-        FloatingActionButton removeBtn;
+        ImageButton removeBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             destName = (TextView)itemView.findViewById(R.id.dest_name);
             destPhoto = (ImageView)itemView.findViewById(R.id.dest_photo);
-            removeBtn = (FloatingActionButton)itemView.findViewById(R.id.removeBtn);
+            removeBtn = (ImageButton)itemView.findViewById(R.id.removeBtn);
 
             removeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

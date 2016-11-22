@@ -44,12 +44,16 @@ public class Dest_details extends AppCompatActivity {
 
         System.out.println("this is it"+HomeScreen.dest_list);
 
-        for(HomeScreen.Destination d : HomeScreen.dest_list){
+
+        for(HomeScreen.Destination d : HomeScreen.data_list){
+            System.out.println(d.name);
+            System.out.println("the name  :"+name);
             if(d.name.equals(name)){
             weblink = d.weblink;
             descript = d.description;
             opert = d.operatingHours;
             trip = d.tripadvisor;
+                System.out.println(weblink);
 
             }
         }

@@ -54,6 +54,7 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     private DrawerLayout mDrawerLayout;
     public static List<Destination> dest_list;
     public static ArrayList<Destination> iti_list;
+    public static ArrayList<Destination> data_list;
     public static String algo_selected;
     public static ArrayList<TransportData.locations> locationsToGo;
     public static double budget;
@@ -106,17 +107,17 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-        postponeEnterTransition();
-
-        final View decor = getWindow().getDecorView();
-        decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                decor.getViewTreeObserver().removeOnPreDrawListener(this);
-                startPostponedEnterTransition();
-                return true;
-            }
-        });
+//        postponeEnterTransition();
+//
+//        final View decor = getWindow().getDecorView();
+//        decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @Override
+//            public boolean onPreDraw() {
+//                decor.getViewTreeObserver().removeOnPreDrawListener(this);
+//                startPostponedEnterTransition();
+//                return true;
+//            }
+//        });
 
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
@@ -292,8 +293,6 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
 
 
-
-
     private void initializeData() {
         if (iti_list == null) {
             dest_list = new ArrayList<>();
@@ -304,7 +303,10 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
             dest_list.add(new Destination("Resort World Sentosa", R.drawable.a, getString(R.string.RWS_weblink), getString(R.string.RWS_des), getString(R.string.RWS_opert), getString(R.string.RWS_trip)));
             dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b, getString(R.string.BTRT_weblink), getString(R.string.BTRT_des), getString(R.string.BTRT_opert), getString(R.string.BTRT_trip)));
             dest_list.add(new Destination("Zoo", R.drawable.c, getString(R.string.Z_weblink), getString(R.string.Z_des), getString(R.string.Z_opert), getString(R.string.Z_trip)));
+            data_list = new ArrayList<>(dest_list);
         }
+
+
 
 
     }

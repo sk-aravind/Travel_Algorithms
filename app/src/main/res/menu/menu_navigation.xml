@@ -3,13 +3,11 @@
 
         <item
             android:id = "@+id/nav_itinerary"
-            android:icon="@drawable/search"
+            android:icon="@drawable/iten"
             android:title="@string/nav_itinerary" />
         <item
-            android:icon="@drawable/search"
-            android:title="Two" />
-        <item
-            android:icon="@drawable/search"
-            android:title="Three" />
+            android:icon="@drawable/map"
+            android:title="Maps"
+            />
     </group>
 </menu>
