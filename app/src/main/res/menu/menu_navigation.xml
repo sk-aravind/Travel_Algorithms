@@ -6,6 +6,7 @@
             android:icon="@drawable/iten"
             android:title="@string/nav_itinerary" />
         <item
+            android:id = "@+id/maps"
             android:icon="@drawable/map"
             android:title="Maps"
             />

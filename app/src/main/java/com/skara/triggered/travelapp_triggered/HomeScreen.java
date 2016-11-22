@@ -136,6 +136,9 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
                             case R.id.nav_itinerary:
                                 goToItinerary(menuItem.getActionView());
                                 break;
+                            case R.id.maps:
+                                goToMaps(menuItem.getActionView());
+                                break;
                             default:
                                 return true;
                         }
@@ -255,6 +258,11 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
     public void goToItinerary(View v){
         Intent i = new Intent(HomeScreen.this,ItineraryMain.class);
+        startActivity(i);
+    }
+
+    public void goToMaps(View v){
+        Intent i = new Intent(HomeScreen.this,MapsActivity.class);
         startActivity(i);
     }
 
