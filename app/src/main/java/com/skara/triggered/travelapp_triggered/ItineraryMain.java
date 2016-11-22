@@ -3,47 +3,30 @@ package com.skara.triggered.travelapp_triggered;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Arrays;
 import java.util.List;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ItineraryMain extends AppCompatActivity {
     private DatabaseReference mDatabase;
-    private String mUserId;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
     public static final String ARG_PAGE = "ARG_PAGE";
     final Context c = this;
     List<HomeScreen.Destination> dest_list;
@@ -72,8 +55,8 @@ public class ItineraryMain extends AppCompatActivity {
         viewPager.setCurrentItem(page);
 
         // Initialize Firebase Auth and Database Reference
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Get phone number
@@ -83,16 +66,15 @@ public class ItineraryMain extends AppCompatActivity {
 
 
         if (mFirebaseUser == null) {
+            return;
             // Not logged in, launch the Log In activity
-        } else {
-//            mUserId = mFirebaseUser.getUid();
-
+        }
+        else {
             final Button button = (Button) findViewById(R.id.addButton);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (mPhoneNumber == null){
-
-
+                        return;
                     }
                     LayoutInflater layoutInflaterAndroid = LayoutInflater.from(c);
                     View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialong_box, null);
@@ -117,15 +99,11 @@ public class ItineraryMain extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("Upload", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialogBox, int id) {
-//                                    mDatabase.child("users").child("travelplans").child(userInputDialogEditText.getText().toString()).setValue(sorted);
-//                                    mDatabase.child("users").child("phone").child(userInputDialogEditText.getText().toString()).setValue(mPhoneNumber);
-
                                     Query queryRef = mDatabase.child("users").child("travelplans").orderByValue().equalTo(sorted);
                                     queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                                                // TODO: handle the post
                                                 val_firebase = postSnapshot.getKey();
                                                 System.out.println(val_firebase);
 
@@ -150,7 +128,7 @@ public class ItineraryMain extends AppCompatActivity {
                                                     System.out.println(val_firebase+" -firebase");
                                                     System.out.println(userInputDialogEditText.getText().toString()+" -local");
 
-                                                    if (val_firebase == null || val_firebase == userInputDialogEditText.getText().toString()) {
+                                                    if (val_firebase == null || val_firebase.equals(userInputDialogEditText.getText().toString())) {
                                                         sDialog
                                                                 .setTitleText("Oops...")
                                                                 .setContentText("Looks like there aren't any matches at the moment!")
@@ -191,12 +169,7 @@ public class ItineraryMain extends AppCompatActivity {
 
                 }
             });
-
-
         }
     }
-
-
-
 }
 

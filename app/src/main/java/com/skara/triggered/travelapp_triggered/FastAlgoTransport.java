@@ -123,23 +123,10 @@ public class FastAlgoTransport {
                 }
             }
 
-
         }
         throw new RuntimeException("Budget can never be fulfilled, maybe walking is not free after all");
     }
 
-    public void printSolution(){
-        this.solve();
-        this.getSolutionPath();
-        for (Edge e: edgeSequence){
-            System.out.print(e.getLocationA()+"==");
-            System.out.print(e.getCurrentTransport());
-            System.out.println("==>"+e.getLocationB());
-        }
-        System.out.print("Total Cost: $");
-        System.out.println(this.getCurrentSum());
-        this.resetEdges();
-    }
 }
 
 

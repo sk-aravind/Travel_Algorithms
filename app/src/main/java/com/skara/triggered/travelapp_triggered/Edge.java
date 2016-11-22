@@ -130,24 +130,6 @@ public class Edge{
         }
     }
 
-    public void printRankedList(){
-        System.out.println("_______________");
-        System.out.println(this.locationA + " -> "+this.locationB);
-        System.out.println(ranked_list);
-        System.out.println("_______________");
-    }
-    public void printCurrentEdge(){
-        System.out.println("_______________");
-        System.out.print("Index:");
-        System.out.println(getCurrentIndex());
-        System.out.print("Transport:");
-        System.out.println(getCurrentTransport());
-        System.out.print("Cost:");
-        System.out.println(getCurrentCost());
-        System.out.print("Time:");
-        System.out.println(getCurrentTime());
-        System.out.println("_______________");
-    }
 
     public String getLocationA(){
         return this.locationA.toString();

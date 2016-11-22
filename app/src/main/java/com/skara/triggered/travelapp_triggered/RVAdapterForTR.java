@@ -7,13 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class RVAdapterForTR extends RecyclerView.Adapter<RVAdapterForTR.ViewHolder> {
-    //all the methods needs to be overwritten to prevent error
     List<TravelRouteFragment.TravelList> travel_list;
     List<String> totalCT_list;
 
@@ -105,6 +101,7 @@ public class RVAdapterForTR extends RecyclerView.Adapter<RVAdapterForTR.ViewHold
     public int getItemViewType(int position){
         return dataSetTypes[position];
     }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);

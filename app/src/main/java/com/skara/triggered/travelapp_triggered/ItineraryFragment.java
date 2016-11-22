@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,7 @@ public class ItineraryFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.info);
 
         TextView valueTV = new TextView(getActivity());
-        valueTV.setText("You currently have no items in your itinerary");
+        valueTV.setText(R.string.NoItems);
         valueTV.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
