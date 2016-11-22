@@ -255,19 +255,4 @@ public class ExhaustiveAlgo {
         return bestRoute;
     }
 
-
-    public static void main(String[] args) {
-        ArrayList<String> toVisit = new ArrayList<>();
-        toVisit.add("SF");
-        toVisit.add("VC");
-        toVisit.add("BTRT");
-        toVisit.add("RWS");
-        toVisit.add("ZOO");
-        ArrayList<String> mode=new ArrayList<String>();
-        ArrayList test = new ArrayList();
-        test.add(1000.0);
-
-        System.out.println(optimal(toVisit,20));
-    }
-
 }
