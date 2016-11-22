@@ -306,11 +306,11 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
             dest_list = new ArrayList<>();
             iti_list = new ArrayList<>();
             locationsToGo = new ArrayList<>();
-            dest_list.add(new Destination("Singapore Flyer", R.drawable.b, getString(R.string.SF_weblink), getString(R.string.SF_des), getString(R.string.SF_opert), getString(R.string.SF_trip)));
-            dest_list.add(new Destination("Vivo City", R.drawable.c, getString(R.string.VC_weblink), getString(R.string.VC_des), getString(R.string.VC_opert), getString(R.string.VC_trip)));
-            dest_list.add(new Destination("Resort World Sentosa", R.drawable.a, getString(R.string.RWS_weblink), getString(R.string.RWS_des), getString(R.string.RWS_opert), getString(R.string.RWS_trip)));
-            dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.b, getString(R.string.BTRT_weblink), getString(R.string.BTRT_des), getString(R.string.BTRT_opert), getString(R.string.BTRT_trip)));
-            dest_list.add(new Destination("Zoo", R.drawable.c, getString(R.string.Z_weblink), getString(R.string.Z_des), getString(R.string.Z_opert), getString(R.string.Z_trip)));
+            dest_list.add(new Destination("Singapore Flyer", R.drawable.c, getString(R.string.SF_weblink), getString(R.string.SF_des), getString(R.string.SF_opert), getString(R.string.SF_trip)));
+            dest_list.add(new Destination("Buddha Tooth Relic Temple", R.drawable.bt, getString(R.string.BTRT_weblink), getString(R.string.BTRT_des), getString(R.string.BTRT_opert), getString(R.string.BTRT_trip)));
+            dest_list.add(new Destination("Vivo City", R.drawable.a, getString(R.string.VC_weblink), getString(R.string.VC_des), getString(R.string.VC_opert), getString(R.string.VC_trip)));
+            dest_list.add(new Destination("Resort World Sentosa", R.drawable.rws, getString(R.string.RWS_weblink), getString(R.string.RWS_des), getString(R.string.RWS_opert), getString(R.string.RWS_trip)));
+            dest_list.add(new Destination("Zoo", R.drawable.zoo, getString(R.string.Z_weblink), getString(R.string.Z_des), getString(R.string.Z_opert), getString(R.string.Z_trip)));
             data_list = new ArrayList<>(dest_list);
         }
 
