@@ -1,5 +1,8 @@
 package com.skara.triggered.travelapp_triggered;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +30,7 @@ public class Dest_details extends AppCompatActivity {
     String descript ;
     String opert ;
     String trip ;
+    Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,27 @@ public class Dest_details extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+
+        final ImageButton button3 = (ImageButton) findViewById(R.id.button_link3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //Intent myIntent = new Intent(view.getContext(), agones.class);
+                //startActivityForResult(myIntent, 0);
+
+                AlertDialog alertDialog = new AlertDialog.Builder(Dest_details.this).create();
+                alertDialog.setTitle("Operating Hours");
+                alertDialog.setMessage(opert);
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+            }
+
         });
 
     }
