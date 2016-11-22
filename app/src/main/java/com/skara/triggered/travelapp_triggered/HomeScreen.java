@@ -1,6 +1,7 @@
 
 package com.skara.triggered.travelapp_triggered;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,13 +42,6 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     public static double budget;
     public static final TransportData.locations startingLocation = TransportData.getLocationEnum("Marina Bay Sands");
 
-    // Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
-    //Type of Auth
-    private static final String TAG = "AnonymousAuth";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,28 +50,9 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Firebase
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-
         Transition fade = new Fade();
         fade.excludeTarget(android.R.id.statusBarBackground, true);
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
-
-        // sign into Firebase
-        signInAnonymously();
 
         // creating navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -117,15 +92,10 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         intent.putExtra("name", destName);
         intent.putExtra("img", destPhoto);
 
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                // the context of the activity
-                this,
-                // For each shared element, add to this method a new Pair item,
-                // which contains the reference of the view we are transitioning *from*,
-                // and the value of the transitionName attribute
-                // new Pair<>(view.findViewById(R.id.dest_name), "text_transition"),
-                new Pair<>(view.findViewById(R.id.dest_photo), "img_transition"));
-        ActivityCompat.startActivity(this, intent, options.toBundle());
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                this, view.findViewById(R.id.dest_photo), "img_transition");
+        startActivity(intent, options.toBundle());
+
     }
 
     @Override
@@ -173,31 +143,8 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         RVAdapter adapter = new RVAdapter(dest_list,this);
         rv.setAdapter(adapter);
 
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
     }
 
-
-    private void signInAnonymously() {
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInAnonymously", task.getException());
-                            Toast.makeText(HomeScreen.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
 
     // Navigation Drawer ===================================================================
@@ -282,5 +229,5 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
 
     }
-    //===============================================================================
+
 }

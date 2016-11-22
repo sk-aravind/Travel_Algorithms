@@ -40,12 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
-
-
-            android:transitionName="text_transition"
             android:layout_margin="24dp"
-
-
             android:fontFamily="sans-serif-light" />
 
 
@@ -115,6 +110,7 @@
             android:background="@null"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="45dp"
+
             />
     </LinearLayout>
     </LinearLayout>

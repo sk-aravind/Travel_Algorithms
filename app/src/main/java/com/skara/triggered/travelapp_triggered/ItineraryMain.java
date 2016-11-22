@@ -2,17 +2,28 @@ package com.skara.triggered.travelapp_triggered;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,12 +44,43 @@ public class ItineraryMain extends AppCompatActivity {
     String list_stringified;
     String val_firebase ;
 
+
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    //Type of Auth
+    private static final String TAG = "AnonymousAuth";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itinerary_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Firebase
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+
+    // sign into Firebase
+    signInAnonymously();
+
+
+
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -96,7 +138,7 @@ public class ItineraryMain extends AppCompatActivity {
 
                     final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
                     alertDialogBuilderUserInput
-                            .setCancelable(false)
+                            .setCancelable(true)
                             .setPositiveButton("Upload", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialogBox, int id) {
                                     Query queryRef = mDatabase.child("users").child("travelplans").orderByValue().equalTo(sorted);
@@ -130,10 +172,10 @@ public class ItineraryMain extends AppCompatActivity {
 
                                                     if (val_firebase == null || val_firebase.equals(userInputDialogEditText.getText().toString())) {
                                                         sDialog
-                                                                .setTitleText("Oops...")
+                                                                .setTitleText("Sorry")
                                                                 .setContentText("Looks like there aren't any matches at the moment!")
                                                                 .setCancelText("OK")
-                                                                .setConfirmText("Check again")
+                                                                .setConfirmText("Refresh")
                                                                 .changeAlertType(SweetAlertDialog.WARNING_TYPE);
                                                         mDatabase.child("users").child("travelplans").child(userInputDialogEditText.getText().toString()).setValue(sorted);
                                                         mDatabase.child("users").child("phone").child(userInputDialogEditText.getText().toString()).setValue(mPhoneNumber);
@@ -144,7 +186,13 @@ public class ItineraryMain extends AppCompatActivity {
                                                                 .setContentText("Send " + val_firebase + " a message")
                                                                 .setConfirmText("SMS")
                                                                 .setCustomImage(R.drawable.haram)
-                                                                .setConfirmClickListener(null)
+                                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                                    @Override
+                                                                    public void onClick(SweetAlertDialog sDialog) {
+//                                                                        SmsManager smsManager = SmsManager.getDefault();
+//                                                                        smsManager.sendTextMessage(mPhoneNumber, null, "sms message", null, null);
+                                                                    }
+                                                                })
                                                                 .changeAlertType(SweetAlertDialog.CUSTOM_IMAGE_TYPE);
                                                         mDatabase.child("users").child("travelplans").child(userInputDialogEditText.getText().toString()).setValue(sorted);
                                                         mDatabase.child("users").child("phone").child(userInputDialogEditText.getText().toString()).setValue(mPhoneNumber);
@@ -170,6 +218,41 @@ public class ItineraryMain extends AppCompatActivity {
                 }
             });
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //creating recycling view
+//        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+//        initializeData();
+//        LinearLayoutManager llm = new LinearLayoutManager(this);
+//        rv.setLayoutManager(llm);
+//        RVAdapter adapter = new RVAdapter(dest_list,this);
+//        rv.setAdapter(adapter);
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+    private void signInAnonymously() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInAnonymously", task.getException());
+                            Toast.makeText(ItineraryMain.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
 
