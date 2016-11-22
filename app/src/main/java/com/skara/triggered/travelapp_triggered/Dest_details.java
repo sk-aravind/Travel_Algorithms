@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +19,13 @@ import java.util.List;
 public class Dest_details extends AppCompatActivity {
 
     TextView title;
-    TextView weblinktext;
     TextView descriptiontext;
-    TextView operttext;
     ImageView imgview;
 
     String weblink ;
     String descript ;
     String opert ;
+    String trip ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,8 @@ public class Dest_details extends AppCompatActivity {
         setContentView(R.layout.activity_dest_details);
 
         title = (TextView) this.findViewById(R.id.detail_titlename);
-        weblinktext = (TextView) this.findViewById(R.id.weblink);
         descriptiontext = (TextView) this.findViewById(R.id.description);
-        operttext = (TextView) this.findViewById(R.id.opert);
+
         imgview = (ImageView) this.findViewById(R.id.dest_photo);
 
 
@@ -50,22 +49,31 @@ public class Dest_details extends AppCompatActivity {
             weblink = d.weblink;
             descript = d.description;
             opert = d.operatingHours;
+            trip = d.tripadvisor;
+
             }
         }
 
-
-        System.out.println("weblink   "+weblink);
         title.setText(name);
         imgview.setImageResource(img);
-        weblinktext.setText(weblink);
         descriptiontext.setText(descript);
-        operttext.setText(opert);
 
 
-        final Button button = (Button) findViewById(R.id.button_link);
+
+        final ImageButton button = (ImageButton) findViewById(R.id.button_link);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse(weblink); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+
+        final ImageButton button2 = (ImageButton) findViewById(R.id.button_link2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Uri uri = Uri.parse(trip); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 
@@ -73,19 +81,5 @@ public class Dest_details extends AppCompatActivity {
         });
 
     }
-//
-//    private void setupMap() {
-//        GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-//
-//        double lat = getIntent().getDoubleExtra("lat", 37.6329946);
-//        double lng = getIntent().getDoubleExtra("lng", -122.4938344);
-//        float zoom = getIntent().getFloatExtra("zoom", 15.0f);
-//
-//        LatLng position = new LatLng(lat, lng);
-//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, zoom));
-//        map.addMarker(new MarkerOptions().position(position));
-//    }
-
-
 
 }

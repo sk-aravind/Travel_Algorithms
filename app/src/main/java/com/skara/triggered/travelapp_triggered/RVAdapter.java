@@ -93,7 +93,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     public void addToItinerary(String destName,int destPhoto,int position){
         removeAt(position);
-
+//error here
         for (HomeScreen.Destination j : HomeScreen.iti_list){
             if (j.name.equals(destName)){
                 return;

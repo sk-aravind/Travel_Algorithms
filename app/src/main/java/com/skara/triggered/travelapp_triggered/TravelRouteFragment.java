@@ -7,9 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -32,17 +29,11 @@ public class TravelRouteFragment extends Fragment {
         // Initialize Fast Algorithm Solver
         initializeData();
 
-        if (HomeScreen.locationsToGo.isEmpty() || HomeScreen.locationsToGo == null) {
-            displayText();
-        }
-
-        else {
-            RecyclerView rv = (RecyclerView) getView().findViewById(R.id.rvTR);
-            LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-            rv.setLayoutManager(llm);
-            RVAdapterForTR adapter = new RVAdapterForTR(travel_list, totalCT_list);
-            rv.setAdapter(adapter);
-        }
+        RecyclerView rv = (RecyclerView) getView().findViewById(R.id.rvTR);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
+        RVAdapterForTR adapter = new RVAdapterForTR(travel_list,totalCT_list);
+        rv.setAdapter(adapter);
     }
 
     public static TravelRouteFragment newInstance(int page) {
@@ -53,18 +44,6 @@ public class TravelRouteFragment extends Fragment {
         return fragment;
     }
 
-
-    public void displayText(){
-        LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.info);
-
-        TextView valueTV = new TextView(getActivity());
-        valueTV.setText("You currently have no items in your itinerary");
-        valueTV.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-
-        linearLayout.addView(valueTV);
-    }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -97,48 +76,6 @@ public class TravelRouteFragment extends Fragment {
         if (HomeScreen.locationsToGo.isEmpty() || HomeScreen.locationsToGo == null){
             return;
         }
-        //exhaustive algorithm is selected
-        else if (HomeScreen.algo_selected.equals("Exhaustive")){
-            travel_list = new ArrayList<>();
-            totalCT_list = new ArrayList<>();
-            ArrayList<String> ltg = new ArrayList<>();
-            for (int j = 0; j<HomeScreen.locationsToGo.size(); j++ ) {
-                String loc = HomeScreen.locationsToGo.get(j).toString();
-                ltg.add(loc);
-            }
-            ArrayList output = ExhaustiveAlgo.optimal(ltg, (int)(HomeScreen.budget));
-            double total_time = (double) output.get(0);
-            double total_cost = (double) output.get(1);
-
-            ArrayList transportSequence = (ArrayList) output.get(2);
-            ArrayList locationSequence = (ArrayList) output.get(3);
-            ArrayList transport_time = (ArrayList) output.get(4);
-            ArrayList transport_cost = (ArrayList) output.get(5);
-
-            for (int k = 0; k < transportSequence.size(); k++){
-                String path = "From " + locationSequence.get(k) + " to " + locationSequence.get(k+1);
-                String cost = "$" + transport_cost.get(k).toString();
-                String time = transport_time.get(k).toString() +" mins";
-                if (transportSequence.get(k).equals("By walk")){
-                    travel_list.add(new TravelList(path,cost,time,R.drawable.walk));
-                }
-                else if (transportSequence.get(k).equals("By bus")){
-                    travel_list.add(new TravelList(path,cost,time,R.drawable.bus));
-                }
-                else if (transportSequence.get(k).equals("By taxi")){
-                    travel_list.add(new TravelList(path,cost,time,R.drawable.taxi));
-                }
-            }
-
-            String totalCost = "Total Cost: $" + String.valueOf(round(total_cost,2));
-            String totalTime = "Total Time: " + String.valueOf(round(total_time,2)) + " mins";
-            totalCT_list.add(totalCost);
-            totalCT_list.add(totalTime);
-
-            return;
-        }
-
-        //default fast algo solver
         FastAlgo FastAlgoSolver = new FastAlgo(HomeScreen.budget, HomeScreen.startingLocation, HomeScreen.locationsToGo);
 
         travel_list = new ArrayList<>();

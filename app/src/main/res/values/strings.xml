@@ -19,7 +19,34 @@
     <string name="title_activity_maps">Map</string>
 
 
-    <string name="X_weblink">www.google.com</string>
-    <string name="X_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
-    <string name="X_opert">9 10pm son</string>
+
+    <string name="SF_weblink">http://www.singaporeflyer.com</string>
+    <string name="SF_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="SF_opert">8:30AM to 10:30PM</string>
+    <string name="SF_trip">https://www.tripadvisor.com.sg/Attraction_Review-g294265-d678639-Reviews-Singapore_Flyer-Singapore.html</string>
+
+    <string name="VC_weblink">http://www.vivocity.com.sg</string>
+    <string name="VC_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="VC_opert">10AM to 10PM</string>
+    <string name="VC_trip">https://www.tripadvisor.com.sg/Attraction_Review-g294265-d634131-Reviews-Vivo_City-Singapore.html</string>
+
+
+    <string name="RWS_weblink">http://www.rwsentosa.com</string>
+    <string name="RWS_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="RWS_opert">Varies depending on establishment</string>
+    <string name="RWS_trip">https://www.tripadvisor.com.sg/Tourism-g294264-Sentosa_Island-Vacations.html</string>
+
+
+    <string name="BTRT_weblink">http://www.btrts.org.sg</string>
+    <string name="BTRT_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="BTRT_opert">7AM to 7PM</string>
+    <string name="BTRT_trip">https://www.tripadvisor.com.my/Attraction_Review-g294265-d1438273-Reviews-Buddha_Tooth_Relic_Temple_and_Museum-Singapore.html</string>
+
+
+    <string name="Z_weblink">http://www.zoo.com.sg</string>
+    <string name="Z_des">ad;lfkjasdlkfj asdlfkjadlksjf asldkfjalsdjf alksjdfaksdh</string>
+    <string name="Z_opert">8:30AM to 6PM</string>
+    <string name="Z_trip">https://www.tripadvisor.com.my/Attraction_Review-g294265-d324542-Reviews-Singapore_Zoo-Singapore.html</string>
+
+
 </resources>
