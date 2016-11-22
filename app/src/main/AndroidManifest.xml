@@ -36,7 +36,6 @@
             android:name=".ItineraryMain"
             android:label="@string/title_activity_itinerary_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TravelRouteFragment" />
         <activity
             android:name=".Route_options"
             android:label="@string/title_activity_route_options"
@@ -46,6 +45,9 @@
             android:name=".Dest_details"
             android:label="@string/title_activity_dest_details"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -58,9 +60,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

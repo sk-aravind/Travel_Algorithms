@@ -1,14 +1,10 @@
 
 package com.skara.triggered.travelapp_triggered;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -16,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,28 +21,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-
-import static android.R.attr.data;
-import static android.R.id.list;
-import static com.skara.triggered.travelapp_triggered.R.layout.destination_card;
 
 public class HomeScreen extends AppCompatActivity implements DetailsInterface{
 
@@ -72,6 +53,8 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Firebase
         mAuth = FirebaseAuth.getInstance();
@@ -92,32 +75,13 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         Transition fade = new Fade();
         fade.excludeTarget(android.R.id.statusBarBackground, true);
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
-//        getWindow().setExitTransition(fade);
-//        getWindow().setEnterTransition(fade);
 
-
-
-        //Sign into Firebase
+        // sign into Firebase
         signInAnonymously();
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // creating navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
-//        postponeEnterTransition();
-//
-//        final View decor = getWindow().getDecorView();
-//        decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//            @Override
-//            public boolean onPreDraw() {
-//                decor.getViewTreeObserver().removeOnPreDrawListener(this);
-//                startPostponedEnterTransition();
-//                return true;
-//            }
-//        });
 
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
@@ -196,7 +160,7 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
         startActivity(intent);
     }
 
-    //Firebase methods & creating view
+    // Firebase methods & creating view
     @Override
     public void onStart() {
         super.onStart();
@@ -300,8 +264,8 @@ public class HomeScreen extends AppCompatActivity implements DetailsInterface{
     }
 
 
-
     private void initializeData() {
+        // Initialize only once
         if (iti_list == null) {
             dest_list = new ArrayList<>();
             iti_list = new ArrayList<>();

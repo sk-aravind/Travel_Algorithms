@@ -1,14 +1,8 @@
 package com.skara.triggered.travelapp_triggered;
 
-
-
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class FastAlgoLocations {
-
-
 
     public static ArrayList<TransportData.locations> findShortestPath(ArrayList<TransportData.locations> locationsToGo, TransportData.locations startingLocation){
 
@@ -19,13 +13,9 @@ public class FastAlgoLocations {
         for (TransportData.locations l : locationsToGo){
             ltg.add(l);
         }
-        //System.out.println("This is the starting location: " + location);
         while (ltg.size() >=1){
             location = shortestDist(ltg,location);
-            //System.out.println("This is the next nearest neighbor: " + location);
             updateList(ltg, shortestPath, location);
-            //System.out.println("Updating list now... This is the list so far..");
-            //System.out.println(Arrays.toString(shortestPath.toArray()));
         }
         shortestPath.add(startingLocation);
         return shortestPath;

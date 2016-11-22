@@ -2,9 +2,6 @@ package com.skara.triggered.travelapp_triggered;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +15,6 @@ import java.util.List;
 
 
 public class RVAdapterForIti extends RecyclerView.Adapter<RVAdapterForIti.ViewHolder> {
-    //all the methods needs to be overwritten to prevent error
     List<HomeScreen.Destination> dest_list;
     private Context context;
 

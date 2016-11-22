@@ -1,7 +1,6 @@
 
 package com.skara.triggered.travelapp_triggered;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
-//all the methods needs to be overwritten to prevent error
 
     List<HomeScreen.Destination> dest_list;
 
@@ -48,8 +45,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
                     String dest = destName.getText().toString();
                     Toast.makeText(view.getContext(),"Added " + dest, Toast.LENGTH_SHORT).show();
                     addToItinerary(dest,(Integer) destPhoto.getTag(),getAdapterPosition());
-
-
                 }
             });
 
@@ -93,7 +88,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     public void addToItinerary(String destName,int destPhoto,int position){
         removeAt(position);
-//error here
         for (HomeScreen.Destination j : HomeScreen.iti_list){
             if (j.name.equals(destName)){
                 return;

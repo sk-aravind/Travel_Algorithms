@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class FastAlgo {
     public ArrayList<TransportData.locations> locationSequence;
-    public ArrayList<TransportData.transportType> transportSequence;
     private FastAlgoTransport solver;
     private final int numTrials =100;
     private String[] solutionPath;

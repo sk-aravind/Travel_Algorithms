@@ -5,13 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -23,26 +18,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import static java.security.AccessController.getContext;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    LatLng coord;
-    String attraction;
-
-    GoogleMap map;
-    LatLng fromadd;
-
-    boolean plot_straight_route = false;
-    AutoCompleteTextView acTextView;
-    ArrayAdapter<String> adapter;
-    View v;
-    int BUILDING_LEVEL = 20;
     Place currentPlace = null;
     int STREET_LEVEL = 15;
 
@@ -74,18 +55,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
                 Toast.makeText(MapsActivity.this, "Place: " + place.getAddress(), Toast.LENGTH_LONG).show();
                 currentPlace = place;
                 mMap.addMarker(new MarkerOptions().position(place.getLatLng()));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), STREET_LEVEL));
-
-
             }
-
             @Override
             public void onError(Status status) {
-                // TODO: Handle the error.
                 Toast.makeText(getBaseContext(), "failure", Toast.LENGTH_LONG).show();
             }
         });
@@ -116,8 +92,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .build();
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-
     }
 
     private static final CharSequence[] MAP_TYPE_ITEMS =

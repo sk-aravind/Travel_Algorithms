@@ -31,7 +31,7 @@ public class TravelRouteFragment extends Fragment {
 
         HomeScreen.algo_selected="";
 
-        // Initialize Fast Algorithm Solver
+        // Initialize Algorithm
         initializeData();
 
         if (HomeScreen.locationsToGo.isEmpty() || HomeScreen.locationsToGo == null) {
@@ -60,7 +60,7 @@ public class TravelRouteFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.info);
 
         TextView valueTV = new TextView(getActivity());
-        valueTV.setText("You currently have no items in your itinerary");
+        valueTV.setText(R.string.NoItems);
         valueTV.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
